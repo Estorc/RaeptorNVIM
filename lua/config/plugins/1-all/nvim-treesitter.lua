@@ -1,0 +1,30 @@
+local Plugins = require("utils.plugins")
+
+Plugins.configureSettings("nvim-treesitter", {
+  ensure_installed = {
+    "bash",
+    "c",
+    "cpp",
+    "css",
+    "dockerfile",
+    "go",
+    "html",
+    "javascript",
+    "json",
+    "lua",
+    "make",
+    "markdown",
+    "python",
+    "regex",
+    "rust",
+    "sql",
+    "toml",
+    "typescript",
+    "vimdoc",
+    "yaml",
+  },
+  highlight = { enable = true },
+  indent = { enable = true },
+  incremental_selection = { enable = true },
+  textobjects = { enable = true },
+})
