@@ -9,6 +9,7 @@ vim.opt.tabstop = 2      -- number of spaces a tab displays as
 vim.opt.shiftwidth = 2   -- number of spaces for auto-indent
 vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.softtabstop = 2  -- spaces inserted when pressing Tab
+vim.opt.autoread = false
 
 -- Add undo file
 vim.opt.undofile = true

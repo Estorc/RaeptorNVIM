@@ -22,7 +22,7 @@ Logger = {
     end
     local levels = { "DEBUG", "INFO", "WARN", "ERROR" }
     local levelStr = levels[level] or "INFO"
-    vim.notify(string.format("[%s] %s", levelStr, message), level)
+    vim.notify(string.format("[%s] %s", levelStr, message), level, { title = "RæptorNVIM" })
   end,
   setLevel = function(newLevel)
     Logger.level = newLevel
