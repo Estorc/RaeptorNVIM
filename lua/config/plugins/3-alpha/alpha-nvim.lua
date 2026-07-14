@@ -4,6 +4,12 @@ local Plugins = require("utils.plugins")
 local Shell = require("utils.shell")
 local Logger = require("utils.logger")
 
+if not Plugins.isPluginInstalled('alpha') then
+  return
+end
+
+
+
 local alpha = require 'alpha'
 local dashboard = require 'alpha.themes.dashboard'
 
@@ -59,7 +65,9 @@ dashboard.config.layout[1].val = padding
 -- handle:close()
 -- dashboard.section.footer.val = fortune
 
-dashboard.section.footer.val = "Ræptor NVIM -- Plume"
+dashboard.section.footer.val = "󰃰 " .. os.date("%I:%M %p") .. "- " .. os.date("%A, %B %d, %Y") ..
+    " -  Ræptor NVIM - 󰛓 Plume - " ..
+    vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
 
 dashboard.config.opts.noautocmd = true
 
