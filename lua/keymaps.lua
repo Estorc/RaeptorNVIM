@@ -71,3 +71,6 @@ end, { desc = "Toggle comment" })
 map("n", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
 map("i", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
 map("v", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
+map("n", "gd", vim.lsp.buf.definition, {
+  desc = "Go to Definition",
+})
