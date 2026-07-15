@@ -14,15 +14,10 @@ vim.opt.autoread = false
 -- Add undo file
 vim.opt.undofile = true
 
-vim.g.clipboard = {
-  name = "wl-clipboard",
-  copy = {
-    ["+"] = "wl-copy",
-    ["*"] = "wl-copy --primary",
-  },
-  paste = {
-    ["+"] = "wl-paste --no-newline",
-    ["*"] = "wl-paste --no-newline --primary",
-  },
-  cache_enabled = 0,
-}
+
+-- Enable treesitter folding (required for function folding)
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldenable = true
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99

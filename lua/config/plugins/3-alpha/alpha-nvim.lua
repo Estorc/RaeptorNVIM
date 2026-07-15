@@ -52,13 +52,27 @@ end
 dashboard.section.header.val = header.val
 dashboard.section.header.opts.hl = header.opts.hl
 padding = math.floor((header_height - header.height) / 2) + 2
-dashboard.section.buttons.val = {
+
+vim.api.nvim_set_hl(0, "AlphaBtn1", { fg = "#a6e3a1" })
+vim.api.nvim_set_hl(0, "AlphaBtn2", { fg = "#89b4fa" })
+vim.api.nvim_set_hl(0, "AlphaBtn3", { fg = "#f9e2af" })
+vim.api.nvim_set_hl(0, "AlphaBtn4", { fg = "#f5c2e7" })
+vim.api.nvim_set_hl(0, "AlphaBtn5", { fg = "#f38ba8" })
+
+local buttons = {
   dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
   dashboard.button("f", "󰱼  Find file", ":Telescope find_files<CR>"),
   dashboard.button("s", "󰍉  Find text", ":Telescope live_grep<CR>"),
   dashboard.button("c", "  Configuration", ":e $MYVIMRC | :cd %:p:h | wincmd k<CR>:Neotree reveal<CR><C-w><C-w>:q<CR>"),
   dashboard.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
 }
+
+dashboard.section.buttons.val = {}
+for i, button in ipairs(buttons) do
+  dashboard.section.buttons.val[i] = button
+  dashboard.section.buttons.val[i].opts.hl = "AlphaBtn" .. i
+end
+
 dashboard.config.layout[1].val = padding
 -- local handle = io.popen('fortune')
 -- local fortune = handle:read("*a")

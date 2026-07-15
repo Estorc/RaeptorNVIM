@@ -18,6 +18,7 @@ return {
   { "petertriho/nvim-scrollbar" },
   { 'akinsho/bufferline.nvim',  version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
   { "3rd/image.nvim" },
+  -- { "nicolas-martin/region-folding.nvim", event = { "BufReadPost", "BufNewFile" } },
   FS.globRequire("plugins.editor"),
   FS.globRequire("plugins.dap"),
   FS.globRequire("plugins.nvchad")

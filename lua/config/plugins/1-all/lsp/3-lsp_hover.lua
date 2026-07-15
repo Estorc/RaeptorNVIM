@@ -204,6 +204,11 @@ lsp_hover.hover = function(error, result, context, _)
   local lines = {};
   local ft;
 
+  ---@type integer LSP client ID.
+  local client_id = context.client_id;
+  ---@type { name: string } LSP client info.
+  local client = vim.lsp.get_client_by_id(client_id) or { name = "Unknown" };
+
   --[[
 		NOTE: LSP hover contents can be any of the followings,
 
@@ -215,19 +220,30 @@ lsp_hover.hover = function(error, result, context, _)
     lines = vim.split(content or "", "\n", { trimempty = true });
     ft = "markdown";
   elseif vim.islist(content) then
+    local list = content;
     content = content[1];
 
     lines = vim.split(content.value or "", "\n", { trimempty = true });
     ft = content.kind;
+    if (client.name == "jdtls" and #list > 1) then
+      -- Add lines of list[2]
+      local content2 = list[2];
+      local lines2 = vim.split(content2.value or "", "\n", { trimempty = true });
+      for _, line in ipairs(lines2) do
+        table.insert(lines, line);
+        ft = "markdown"
+      end
+      vim.api.nvim_buf_set_keymap(buffer, "n", "gx", "<CMD>Markview open<CR>", {
+        desc = "Tree-sitter based link opener from `markview.nvim`."
+      });
+      vim.api.nvim_buf_set_keymap(buffer, "x", "gx", "<CMD>Markview open<CR>", {
+        desc = "Tree-sitter based link opener from `markview.nvim`."
+      });
+    end
   else
     lines = vim.split(content.value or "", "\n", { trimempty = true });
     ft = content.kind;
   end
-
-  ---@type integer LSP client ID.
-  local client_id = context.client_id;
-  ---@type { name: string } LSP client info.
-  local client = vim.lsp.get_client_by_id(client_id) or { name = "Unknown" };
 
   ---@type hover.opts
   local config = match(client.name);
