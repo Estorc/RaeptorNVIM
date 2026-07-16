@@ -17,7 +17,8 @@ vim.opt.undofile = true
 
 -- Enable treesitter folding (required for function folding)
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldcolumn = '1' -- '0' is not bad
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
