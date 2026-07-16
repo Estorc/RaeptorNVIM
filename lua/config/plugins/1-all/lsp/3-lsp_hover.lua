@@ -405,6 +405,7 @@ end
 
 lsp_hover.setup({
   ["^lua_ls"] = {
-    border_hl = "Special"
+    border_hl = "Special",
+    name = " Lua"
   }
 });

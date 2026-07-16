@@ -54,13 +54,13 @@ local options = {
           if (language == "cpp") then language = "C++" end
           -- ensure first letter is uppercase
           language = language:sub(1, 1):upper() .. language:sub(2)
-          language_icon = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype)
+          local language_icon = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype)
           return "%#St_lang_sep#\u{E0B6}%#St_lang#" .. language_icon .. " %#St_cmake_text# " .. language .. " "
         end,
         cmake = function()
-          cmake = require("cmake-tools")
+          local cmake = require("cmake-tools")
           if (not cmake.is_cmake_project()) then return "" end
-          res = "%#St_cmake_sep#\u{E0B6}%#St_cmake#\u{E794} %#St_cmake_text# "
+          local res = "%#St_cmake_sep#\u{E0B6}%#St_cmake#\u{E794} %#St_cmake_text# "
           if (cmake.get_build_target() ~= nil) then
             res = res .. table.concat(cmake.get_build_target()) .. " "
           end

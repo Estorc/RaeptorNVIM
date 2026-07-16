@@ -2,6 +2,13 @@ local map = vim.keymap.set
 
 local wk = require("which-key")
 
+
+function ExitNVIM()
+  if vim.fn.confirm("Quit?", "&Yes\n&No", 2) == 1 then
+    vim.cmd("quitall!")
+  end
+end
+
 wk.add({
   { "<C-h>",      "<C-w>h",                                       desc = "Move to left window" },
   { "<C-j>",      "<C-w>j",                                       desc = "Move to lower window" },
@@ -40,30 +47,33 @@ wk.add({
   { "<leader>bn", ":enew<CR>",                                    desc = "New buffer" },
   {
     "<leader>Q",
-    function()
-      if vim.fn.confirm("Quit?", "&Yes\n&No", 2) == 1 then
-        vim.cmd("quitall!")
-      end
-    end,
+    ExitNVIM,
     desc = "Quit NVIM"
+  },
+  {
+    "<leader>x",
+    function()
+      vim.cmd("close")
+    end,
+    desc = "Close window"
   },
 })
 
 -- Add <C-hjkl> to move windows in terminal mode
-vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { desc = "Move to left window" })
-vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], { desc = "Move to lower window" })
-vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], { desc = "Move to upper window" })
-vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Move to right window" })
+map("t", "<C-h>", [[<C-\><C-n><C-w>h]], { desc = "Move to left window" })
+map("t", "<C-j>", [[<C-\><C-n><C-w>j]], { desc = "Move to lower window" })
+map("t", "<C-k>", [[<C-\><C-n><C-w>k]], { desc = "Move to upper window" })
+map("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Move to right window" })
 
 -- Add <C-Esc> to exit terminal mode
-vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+map("t", "<C-Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 -- Comment with <leader>/ in normal and visual mode using Comment.nvim
-vim.keymap.set("x", "<leader>/", function()
+map("x", "<leader>/", function()
   vim.cmd.normal({ args = { vim.keycode("gc") } })
 end, { desc = "Toggle comment" })
 
-vim.keymap.set("n", "<leader>/", function()
+map("n", "<leader>/", function()
   vim.cmd.normal({ args = { vim.keycode("gcc") } })
 end, { desc = "Toggle comment" })
 
@@ -74,3 +84,47 @@ map("v", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
 map("n", "gd", vim.lsp.buf.definition, {
   desc = "Go to Definition",
 })
+
+
+function UsedCommand(command_list)
+  if vim.fn.getcmdtype() == ":" then
+    for _, command in ipairs(command_list) do
+      local pattern = "%f[%w]" .. command .. "!?%f[%W]"
+      if vim.fn.getcmdline():match(pattern) then
+        return true
+      end
+    end
+  end
+  return false
+end
+
+-- Disable :q :wq :q! :wq!, etc
+vim.keymap.set("c", "<CR>", function()
+  if UsedCommand({ "q", "quit" }) then
+    vim.schedule(function()
+      Snacks.bufdelete()
+      -- Close if file buffer and empty
+    end)
+    return "<C-u><CR>"
+  elseif UsedCommand({ "close" }) then
+    -- If a file buffer, only if empty or not the last
+    return "<CR>"
+  elseif UsedCommand({ "exit" }) then
+    vim.schedule(function()
+      ExitNVIM()
+    end)
+    return "<C-u><CR>"
+  elseif UsedCommand({ "qa", "quitall", "qall", "quita" }) then
+    vim.schedule(function()
+      Snacks.bufdelete.all()
+    end)
+    return "<C-u><CR>"
+  elseif UsedCommand({ "wq" }) then
+    vim.schedule(function()
+      vim.notify("VIM command was disabled to prevent layout breaking.", vim.log.levels.INFO)
+    end)
+    return "<C-u><CR>"
+  else
+    return "<CR>"
+  end
+end, { expr = true })

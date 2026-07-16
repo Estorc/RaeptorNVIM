@@ -10,6 +10,7 @@ vim.opt.shiftwidth = 2   -- number of spaces for auto-indent
 vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.softtabstop = 2  -- spaces inserted when pressing Tab
 vim.opt.autoread = false
+vim.o.wrap = false
 
 -- Add undo file
 vim.opt.undofile = true
@@ -22,3 +23,10 @@ vim.opt.foldcolumn = '1' -- '0' is not bad
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+
+vim.diagnostic.config({
+  virtual_text = true,
+  virtual_lines = { current_line = true },
+  underline = true,
+  update_in_insert = false
+})
