@@ -4,9 +4,70 @@ local wk = require("which-key")
 
 
 function ExitNVIM()
-  if vim.fn.confirm("Quit?", "&Yes\n&No", 2) == 1 then
+  if vim.fn.confirm("Quit NVIM?", "&Yes\n&No", 2) == 1 then
     vim.cmd("quitall!")
   end
+end
+
+function CloseAllWindowFileBuffer()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+
+    if vim.bo[buf].buftype == "" then
+      vim.api.nvim_win_close(win, true)
+    end
+  end
+  -- Close the possible last file buffers
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[buf].buftype == "" then
+      vim.bo[buf].buflisted = false
+    end
+  end
+end
+
+function CloseBuffer()
+  local isAFileBuffer = vim.bo.buftype == ''
+  if #vim.fn.getbufinfo({ buflisted = 1 }) <= 1 then
+    if vim.bo.modified then
+      local result = vim.fn.confirm("Save changes to \"" .. vim.api.nvim_buf_get_name(0) .. "\"?", "&Yes\n&No\n&Cancel",
+        2)
+      if result == 1 then
+        vim.cmd("w")
+      end
+      if result == 2 then
+        vim.cmd("edit!")
+      end
+      if result == 3 then
+        return
+      end
+    end
+    vim.cmd('q')
+    if isAFileBuffer then
+      CloseAllWindowFileBuffer()
+    end
+  else
+    Snacks.bufdelete()
+  end
+end
+
+function CloseWindow()
+  if vim.bo.buftype ~= '' or CountFileBuffer() > 1 then
+    vim.cmd('close')
+  end
+end
+
+function CountFileBuffer()
+  local count = 0
+
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+
+    if vim.bo[buf].buftype == "" then
+      count = count + 1
+    end
+  end
+
+  return count
 end
 
 wk.add({
@@ -27,24 +88,28 @@ wk.add({
 
   -- Close buffer
   { "<leader>b",  group = "buffers" },
-  { "<leader>q",  ":lua Snacks.bufdelete()<CR>",                  desc = "Close buffer" },
-  { "<leader>bd", ":lua Snacks.bufdelete()<CR>",                  desc = "Close buffer" },
-  { "<leader>bo", ":lua Snacks.bufdelete.other()<CR>",            desc = "Close others buffers" },
-  { "<leader>ba", ":lua Snacks.bufdelete.all()<CR>",              desc = "Close all buffers" },
+  {
+    "<leader>q",
+    CloseBuffer,
+    desc = "Close buffer"
+  },
+  { "<leader>bd", ":lua Snacks.bufdelete()<CR>",                desc = "Close buffer" },
+  { "<leader>bo", ":lua Snacks.bufdelete.other()<CR>",          desc = "Close others buffers" },
+  { "<leader>ba", ":lua Snacks.bufdelete.all()<CR>",            desc = "Close all buffers" },
 
   -- Files
   { "<leader>f",  group = "files" },
-  { "<leader>ff", ":Telescope find_files<CR>",                    desc = "Find files" },
-  { "<leader>fg", ":Telescope live_grep<CR>",                     desc = "Live grep" },
-  { "<leader>fb", ":Telescope buffers<CR>",                       desc = "List buffers" },
-  { "<leader>fh", ":Telescope help_tags<CR>",                     desc = "Help tags" },
+  { "<leader>ff", ":Telescope find_files<CR>",                  desc = "Find files" },
+  { "<leader>fg", ":Telescope live_grep<CR>",                   desc = "Live grep" },
+  { "<leader>fb", ":Telescope buffers<CR>",                     desc = "List buffers" },
+  { "<leader>fh", ":Telescope help_tags<CR>",                   desc = "Help tags" },
 
   -- NvChad
   { "<leader>n",  group = "nvchad" },
-  { "<leader>nt", ":lua require(\"nvchad.themes\").open()<CR>",   desc = "NvChad theme" },
+  { "<leader>nt", ":lua require(\"nvchad.themes\").open()<CR>", desc = "NvChad theme" },
 
   -- Create new buffer
-  { "<leader>bn", ":enew<CR>",                                    desc = "New buffer" },
+  { "<leader>bn", ":enew<CR>",                                  desc = "New buffer" },
   {
     "<leader>Q",
     ExitNVIM,
@@ -52,9 +117,7 @@ wk.add({
   },
   {
     "<leader>x",
-    function()
-      vim.cmd("close")
-    end,
+    CloseWindow,
     desc = "Close window"
   },
 })
@@ -85,7 +148,6 @@ map("n", "gd", vim.lsp.buf.definition, {
   desc = "Go to Definition",
 })
 
-
 function UsedCommand(command_list)
   if vim.fn.getcmdtype() == ":" then
     for _, command in ipairs(command_list) do
@@ -101,14 +163,12 @@ end
 -- Disable :q :wq :q! :wq!, etc
 vim.keymap.set("c", "<CR>", function()
   if UsedCommand({ "q", "quit" }) then
-    vim.schedule(function()
-      Snacks.bufdelete()
-      -- Close if file buffer and empty
-    end)
+    vim.schedule(CloseBuffer)
     return "<C-u><CR>"
   elseif UsedCommand({ "close" }) then
     -- If a file buffer, only if empty or not the last
-    return "<CR>"
+    vim.schedule(CloseWindow)
+    return "<C-u><CR>"
   elseif UsedCommand({ "exit" }) then
     vim.schedule(function()
       ExitNVIM()
@@ -116,7 +176,12 @@ vim.keymap.set("c", "<CR>", function()
     return "<C-u><CR>"
   elseif UsedCommand({ "qa", "quitall", "qall", "quita" }) then
     vim.schedule(function()
-      Snacks.bufdelete.all()
+      if (vim.bo.buftype == '') then
+        Snacks.bufdelete.all()
+        if #vim.fn.getbufinfo({ buflisted = 1 }) <= 1 and not vim.bo.modified then
+          CloseAllWindowFileBuffer()
+        end
+      end
     end)
     return "<C-u><CR>"
   elseif UsedCommand({ "wq" }) then

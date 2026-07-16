@@ -11,6 +11,7 @@ vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.softtabstop = 2  -- spaces inserted when pressing Tab
 vim.opt.autoread = false
 vim.o.wrap = false
+vim.o.confirm = true
 
 -- Add undo file
 vim.opt.undofile = true

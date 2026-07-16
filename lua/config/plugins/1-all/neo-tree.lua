@@ -212,6 +212,14 @@ Plugins.configureSettings("neo-tree", {
       },
     },
   },
+  event_handlers = {
+    {
+      event = "file_opened",
+      handler = function(file_path)
+        vim.cmd(":Neotree show")
+      end,
+    },
+  },
 })
 
 
@@ -256,38 +264,38 @@ vim.g.loaded_netrwPlugin = 1
 -- })
 
 
-local first_time_only = true
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    local buf = vim.api.nvim_get_current_buf()
-    local filetype = vim.bo[buf].filetype
-
-    -- Check if the nvim arg is a directory
-    if vim.fn.argc() == 0 or vim.fn.isdirectory(vim.fn.argv(0)) == 0 then
-      return
-    end
-    if filetype ~= "neo-tree" and vim.fn.isdirectory(vim.fn.expand("%:p")) == 0 and first_time_only then
-      first_time_only = false
-      local has_neo = false
-
-      for _, win in ipairs(vim.api.nvim_list_wins()) do
-        local b = vim.api.nvim_win_get_buf(win)
-        if vim.bo[b].filetype == "neo-tree" then
-          has_neo = true
-          break
-        end
-      end
-
-      if not has_neo then
-        require("neo-tree.command").execute({
-          source = "filesystem",
-          position = "left",
-          reveal = true,
-          dir = vim.fn.getcwd(),
-        })
-        -- Focus the buffer window after opening Neo-tree
-        vim.cmd("wincmd p")
-      end
-    end
-  end,
-})
+-- local first_time_only = true
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   callback = function()
+--     local buf = vim.api.nvim_get_current_buf()
+--     local filetype = vim.bo[buf].filetype
+--
+--     -- Check if the nvim arg is a directory
+--     if vim.fn.argc() == 0 or vim.fn.isdirectory(vim.fn.argv(0)) == 0 then
+--       return
+--     end
+--     if filetype ~= "neo-tree" and vim.fn.isdirectory(vim.fn.expand("%:p")) == 0 and first_time_only then
+--       first_time_only = false
+--       local has_neo = false
+--
+--       for _, win in ipairs(vim.api.nvim_list_wins()) do
+--         local b = vim.api.nvim_win_get_buf(win)
+--         if vim.bo[b].filetype == "neo-tree" then
+--           has_neo = true
+--           break
+--         end
+--       end
+--
+--       if not has_neo then
+--         require("neo-tree.command").execute({
+--           source = "filesystem",
+--           position = "left",
+--           reveal = true,
+--           dir = vim.fn.getcwd(),
+--         })
+--         -- Focus the buffer window after opening Neo-tree
+--         vim.cmd("wincmd p")
+--       end
+--     end
+--   end,
+-- })

@@ -63,7 +63,9 @@ local buttons = {
   dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
   dashboard.button("f", "󰱼  Find file", ":Telescope find_files<CR>"),
   dashboard.button("s", "󰍉  Find text", ":Telescope live_grep<CR>"),
-  dashboard.button("c", "  Configuration", ":e $MYVIMRC | :cd %:p:h | wincmd k<CR>:Neotree reveal<CR><C-w><C-w>:q<CR>"),
+  dashboard.button("c", "  Configuration",
+    ":e " ..
+    vim.fn.fnamemodify(vim.env.MYVIMRC, ":h") .. " | :cd %:p:h | wincmd k<CR>"),
   dashboard.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
 }
 
