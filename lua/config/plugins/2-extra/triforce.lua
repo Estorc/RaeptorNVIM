@@ -110,7 +110,7 @@ Plugins.configureSettings('triforce', {
   debug = false,
 })
 
-if (not Plugins.isPluginInstalled('triforce')) then
+if (Plugins.isPluginInstalled('triforce')) then
   local wk = require("which-key")
 
   wk.add({

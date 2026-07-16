@@ -233,12 +233,6 @@ lsp_hover.hover = function(error, result, context, _)
         table.insert(lines, line);
         ft = "markdown"
       end
-      vim.api.nvim_buf_set_keymap(buffer, "n", "gx", "<CMD>Markview open<CR>", {
-        desc = "Tree-sitter based link opener from `markview.nvim`."
-      });
-      vim.api.nvim_buf_set_keymap(buffer, "x", "gx", "<CMD>Markview open<CR>", {
-        desc = "Tree-sitter based link opener from `markview.nvim`."
-      });
     end
   else
     lines = vim.split(content.value or "", "\n", { trimempty = true });
@@ -350,6 +344,12 @@ lsp_hover.hover = function(error, result, context, _)
     --- If markview is available use it to render stuff.
     --- This is for `v25`.
     require("markview").render(lsp_hover.buffer, { enable = true, hybrid_mode = false });
+    vim.api.nvim_buf_set_keymap(lsp_hover.buffer, "n", "gx", "<CMD>Markview open<CR>", {
+      desc = "Tree-sitter based link opener from `markview.nvim`."
+    });
+    vim.api.nvim_buf_set_keymap(lsp_hover.buffer, "x", "gx", "<CMD>Markview open<CR>", {
+      desc = "Tree-sitter based link opener from `markview.nvim`."
+    });
   end
 
   ---_
