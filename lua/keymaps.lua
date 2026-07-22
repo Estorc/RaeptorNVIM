@@ -25,6 +25,12 @@ function CloseAllWindowFileBuffer()
   end
 end
 
+function CloseWindow()
+  if vim.bo.buftype ~= '' or CountFileBuffer() > 1 then
+    vim.cmd('close')
+  end
+end
+
 function CloseBuffer()
   local isAFileBuffer = vim.bo.buftype == ''
   if #vim.fn.getbufinfo({ buflisted = 1 }) <= 1 then
@@ -46,13 +52,14 @@ function CloseBuffer()
       CloseAllWindowFileBuffer()
     end
   else
+    if vim.bo.filetype == 'neo-tree' then
+      vim.cmd('Neotree close')
+      return
+    end
     Snacks.bufdelete()
-  end
-end
-
-function CloseWindow()
-  if vim.bo.buftype ~= '' or CountFileBuffer() > 1 then
-    vim.cmd('close')
+    if not isAFileBuffer then
+      CloseWindow()
+    end
   end
 end
 
@@ -120,6 +127,11 @@ wk.add({
     CloseWindow,
     desc = "Close window"
   },
+  {
+    '<leader>r',
+    ":set relativenumber!<CR>",
+    desc = "Toggle relative number"
+  }
 })
 
 -- Add <C-hjkl> to move windows in terminal mode
@@ -130,6 +142,8 @@ map("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Move to right window" })
 
 -- Add <C-Esc> to exit terminal mode
 map("t", "<C-Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+map("t", "<Esc><leader>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+
 
 -- Comment with <leader>/ in normal and visual mode using Comment.nvim
 map("x", "<leader>/", function()
@@ -185,6 +199,10 @@ vim.keymap.set("c", "<CR>", function()
     end)
     return "<C-u><CR>"
   elseif UsedCommand({ "wq" }) then
+    vim.cmd('write')
+    vim.schedule(CloseBuffer)
+    return "<C-u><CR>"
+  elseif UsedCommand({}) then
     vim.schedule(function()
       vim.notify("VIM command was disabled to prevent layout breaking.", vim.log.levels.INFO)
     end)

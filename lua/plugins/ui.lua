@@ -1,8 +1,8 @@
 local FS = require("utils.fs")
 return {
   { "MunifTanjim/nui.nvim" },
-  { "goolord/alpha-nvim",  dependencies = { 'nvim-tree/nvim-web-devicons' } },
-  -- { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
+  { "goolord/alpha-nvim",        dependencies = { 'nvim-tree/nvim-web-devicons' } },
+  { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
   {
     'saghen/blink.cmp',
     dependencies = {

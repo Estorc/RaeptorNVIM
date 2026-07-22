@@ -13,7 +13,7 @@ return {
       picker = { enabled = true },
       -- notifier = { enabled = true },
       bufdelete = { enabled = true },
-      image = { enabled = true },
+      image = { enabled = false },
       rename = { enabled = true },
       quickfile = { enabled = true },
       toggle = { enabled = true },

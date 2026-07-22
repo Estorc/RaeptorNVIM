@@ -9,9 +9,9 @@ Plugins.configureSettings('bufferline', {
     offsets = {
       {
         filetype = "neo-tree",
-        text = "File Explorer",
+        text = "󱋣 File Explorer",
         separator = true,
-        text_align = "left",
+        text_align = "center",
       },
     },
   },

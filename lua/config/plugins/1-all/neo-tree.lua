@@ -2,6 +2,24 @@ local Plugins = require("utils.plugins")
 
 -- Mappings for Neo-tree
 Plugins.configureSettings("neo-tree", {
+  popup_border_style = "rounded",
+  default_component_configs = {
+    git_status = {
+      symbols = {
+        -- Change type
+        added = "✚", -- or "✚"
+        modified = "", -- or ""
+        deleted = "✖", -- this can only be used in the git_status source
+        renamed = "󰁕", -- this can only be used in the git_status source
+        -- Status type
+        untracked = "",
+        ignored = "",
+        unstaged = "",
+        staged = "",
+        conflict = "",
+      },
+    },
+  },
   source_selector = {
     winbar = true,
   },

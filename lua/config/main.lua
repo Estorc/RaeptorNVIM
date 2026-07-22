@@ -1,6 +1,5 @@
 local FS = require("utils.fs")
 local Plugins = require("utils.plugins")
-local Raeptor = require("raeptor")
 local Logger = require("utils.logger")
 
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
