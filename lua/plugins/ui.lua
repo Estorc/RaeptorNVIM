@@ -20,6 +20,7 @@ return {
   { "3rd/image.nvim" },
   { 'kevinhwang91/nvim-ufo',    dependencies = 'kevinhwang91/promise-async' },
   -- { "nicolas-martin/region-folding.nvim", event = { "BufReadPost", "BufNewFile" } },
+  { "nvim-zh/colorful-winsep.nvim", config = true, event = { "WinLeave" } },
   FS.globRequire("plugins.editor"),
   FS.globRequire("plugins.dap"),
   FS.globRequire("plugins.nvchad")
