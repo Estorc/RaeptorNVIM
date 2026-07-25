@@ -17,24 +17,32 @@ Plugins.configureSettings('bufferline', {
   },
 })
 
+if (Plugins.isPluginInstalled('bufferline')) then
+  -- local wk = require("which-key")
+  -- wk.add({
+  --
+  --   { "<S-h>", "<cmd>BufferLineCyclePrev<CR>", desc = "Previous buffer" },
+  --   { "<S-l>", "<cmd>BufferLineCycleNext<CR>", desc = "Next buffer" },
+  -- })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "alpha" },
-  callback = function()
-    vim.opt_local.showtabline = 0
-  end,
-})
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "alpha" },
+    callback = function()
+      vim.opt_local.showtabline = 0
+    end,
+  })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    if vim.bo.filetype ~= "alpha" then
-      vim.opt.showtabline = 2
-    end
-  end,
-})
+  vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function()
+      if vim.bo.filetype ~= "alpha" then
+        vim.opt.showtabline = 2
+      end
+    end,
+  })
 
-local colors = require("base46").get_theme_tb("base_30")
+  local colors = require("base46").get_theme_tb("base_30")
 
-vim.api.nvim_set_hl(0, "BufferLineFill", {
-  bg = colors.darker_black,
-})
+  vim.api.nvim_set_hl(0, "BufferLineFill", {
+    bg = colors.darker_black,
+  })
+end

@@ -16,11 +16,18 @@ return {
   { "nvim-lua/plenary.nvim" },
   { 'OXY2DEV/markview.nvim' },
   { "petertriho/nvim-scrollbar" },
-  { 'akinsho/bufferline.nvim',  version = "*",                              dependencies = 'nvim-tree/nvim-web-devicons' },
+  -- { 'akinsho/bufferline.nvim',  version = "*",                              dependencies = 'nvim-tree/nvim-web-devicons' },
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+  },
   { "3rd/image.nvim" },
-  { 'kevinhwang91/nvim-ufo',    dependencies = 'kevinhwang91/promise-async' },
+  { 'kevinhwang91/nvim-ufo',        dependencies = 'kevinhwang91/promise-async' },
   -- { "nicolas-martin/region-folding.nvim", event = { "BufReadPost", "BufNewFile" } },
-  { "nvim-zh/colorful-winsep.nvim", config = true, event = { "WinLeave" } },
+  { "nvim-zh/colorful-winsep.nvim", config = true,                              event = { "WinLeave" } },
   FS.globRequire("plugins.editor"),
   FS.globRequire("plugins.dap"),
   FS.globRequire("plugins.nvchad")

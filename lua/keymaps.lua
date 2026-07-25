@@ -83,9 +83,6 @@ wk.add({
   { "<C-k>",      "<C-w>k",                                       desc = "Move to upper window" },
   { "<C-l>",      "<C-w>l",                                       desc = "Move to right window" },
 
-  { "<S-h>",      "<cmd>BufferLineCyclePrev<CR>",                 desc = "Previous buffer" },
-  { "<S-l>",      "<cmd>BufferLineCycleNext<CR>",                 desc = "Next buffer" },
-
   -- Terminal
   { "<leader>t",  group = "terminal" },
   { "<leader>tt", ":ToggleTerm direction=horizontal size=20<CR>", desc = "Toggle terminal" },
