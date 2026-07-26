@@ -20,8 +20,6 @@ FS = {
     -- Recursively find all Lua files matching the pattern and require them
     pattern = vim.fn.stdpath("config") .. "/lua/" .. pattern:gsub("%.", "/") .. "/**/*.lua"
     local files = vim.fn.glob(pattern, true, true)
-    Logger.log("Loading files from pattern: " .. pattern, vim.log.levels.INFO)
-    Logger.log("Found files: " .. table.concat(files, ", "), vim.log.levels.INFO)
     for _, file in ipairs(files) do
       -- Remove the leading path and the .lua extension, then replace / with . to get the module name
       local module_name = file:gsub(vim.fn.stdpath("config") .. "/lua/", ""):gsub("%.lua$", ""):gsub("/", ".")

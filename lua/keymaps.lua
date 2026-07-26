@@ -35,16 +35,25 @@ function CloseBuffer()
   local isAFileBuffer = vim.bo.buftype == ''
   if #vim.fn.getbufinfo({ buflisted = 1 }) <= 1 then
     if vim.bo.modified then
-      local result = vim.fn.confirm("Save changes to \"" .. vim.api.nvim_buf_get_name(0) .. "\"?", "&Yes\n&No\n&Cancel",
-        2)
-      if result == 1 then
-        vim.cmd("w")
+      local filename = vim.api.nvim_buf_get_name(0);
+      local newFile = false
+      if (filename == '') then
+        -- Ask for name for the file, empty = no save
+        filename = vim.fn.input("Save file as: ")
+        newFile = true
       end
-      if result == 2 then
-        vim.cmd("edit!")
-      end
-      if result == 3 then
-        return
+      if (filename ~= '') then
+        local result = vim.fn.confirm("Save changes to \"" .. filename .. "\"?", "&Yes\n&No\n&Cancel",
+          2)
+        if result == 1 then
+          vim.cmd("w " .. filename)
+        end
+        if result == 2 and not newFile then
+          vim.cmd("edit!")
+        end
+        if result == 3 then
+          return
+        end
       end
     end
     vim.cmd('q')
