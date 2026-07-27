@@ -117,9 +117,15 @@ wk.add({
   { "<leader>fb", ":Telescope buffers<CR>",                     desc = "List buffers" },
   { "<leader>fh", ":Telescope help_tags<CR>",                   desc = "Help tags" },
 
+  -- Zen Mode
+  { "<leader>z",  ":lua Snacks.zen({win = {width = 160}})<CR>", desc = "Toggle Zen Mode" },
+
   -- NvChad
   { "<leader>n",  group = "nvchad" },
   { "<leader>nt", ":lua require(\"nvchad.themes\").open()<CR>", desc = "NvChad theme" },
+
+  -- Git
+  { "<leader>g",  group = "git" },
 
   -- Create new buffer
   { "<leader>bn", ":enew<CR>",                                  desc = "New buffer" },

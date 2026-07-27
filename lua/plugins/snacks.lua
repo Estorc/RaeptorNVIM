@@ -22,6 +22,7 @@ return {
       dim = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
+      zen = { enabled = true },
     },
   },
   FS.globRequire("plugins.snacks"),
