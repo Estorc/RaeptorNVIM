@@ -111,11 +111,12 @@ wk.add({
   { "<leader>ba", ":lua Snacks.bufdelete.all()<CR>",            desc = "Close all buffers" },
 
   -- Files
-  { "<leader>f",  group = "files" },
+  { "<leader>f",  group = "files & search" },
   { "<leader>ff", ":Telescope find_files<CR>",                  desc = "Find files" },
   { "<leader>fg", ":Telescope live_grep<CR>",                   desc = "Live grep" },
   { "<leader>fb", ":Telescope buffers<CR>",                     desc = "List buffers" },
   { "<leader>fh", ":Telescope help_tags<CR>",                   desc = "Help tags" },
+  { "<leader>fd", ":GrugFarFloat<CR>",                          desc = "Search Grug Far" },
 
   -- Zen Mode
   { "<leader>z",  ":lua Snacks.zen({win = {width = 160}})<CR>", desc = "Toggle Zen Mode" },

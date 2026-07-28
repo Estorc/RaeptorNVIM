@@ -1,5 +1,6 @@
 local Plugins = require("utils.plugins")
 
+local events = require("neo-tree.events");
 -- Mappings for Neo-tree
 Plugins.configureSettings("neo-tree", {
   popup_border_style = "rounded",
@@ -21,7 +22,7 @@ Plugins.configureSettings("neo-tree", {
     },
   },
   source_selector = {
-    winbar = true,
+    winbar = false,
   },
   window = {
     mappings = {
@@ -92,8 +93,8 @@ Plugins.configureSettings("neo-tree", {
       ["q"] = "close_window",
       ["R"] = "refresh",
       ["?"] = "show_help",
-      ["<S-h>"] = "prev_source",
-      ["<S-l>"] = "next_source",
+      -- ["<S-h>"] = "prev_source",
+      -- ["<S-l>"] = "next_source",
       ["i"] = "show_file_details",
       -- ["i"] = {
       --   "show_file_details",
@@ -232,7 +233,7 @@ Plugins.configureSettings("neo-tree", {
   },
   event_handlers = {
     {
-      event = "file_opened",
+      event = events.FILE_OPENED,
       handler = function(file_path)
         vim.cmd(":Neotree show")
       end,
@@ -256,20 +257,20 @@ Plugins.configureKeymaps("neo-tree", {
     opts = { noremap = true, silent = true },
     desc = "Focus Neo-tree",
   },
-  {
-    mode = "n",
-    lhs = "<leader>be",
-    rhs = "<cmd>Neotree buffers<cr>",
-    opts = { noremap = true, silent = true },
-    desc = "Neo-tree Buffers",
-  },
-  {
-    mode = "n",
-    lhs = "<leader>ge",
-    rhs = "<cmd>Neotree git_status<cr>",
-    opts = { noremap = true, silent = true },
-    desc = "Neo-tree Git Status",
-  },
+  -- {
+  --   mode = "n",
+  --   lhs = "<leader>be",
+  --   rhs = "<cmd>Neotree buffers<cr>",
+  --   opts = { noremap = true, silent = true },
+  --   desc = "Neo-tree Buffers",
+  -- },
+  -- {
+  --   mode = "n",
+  --   lhs = "<leader>ge",
+  --   rhs = "<cmd>Neotree git_status<cr>",
+  --   opts = { noremap = true, silent = true },
+  --   desc = "Neo-tree Git Status",
+  -- },
 })
 
 vim.g.loaded_netrw = 1

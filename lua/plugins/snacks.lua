@@ -23,6 +23,7 @@ return {
       statuscolumn = { enabled = true },
       words = { enabled = true },
       zen = { enabled = true },
+      window = { enabled = true },
     },
   },
   FS.globRequire("plugins.snacks"),

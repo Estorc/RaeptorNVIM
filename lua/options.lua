@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "  "
 vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -32,3 +32,5 @@ vim.diagnostic.config({
   underline = true,
   update_in_insert = false
 })
+
+vim.cmd(":ShowkeysToggle")
