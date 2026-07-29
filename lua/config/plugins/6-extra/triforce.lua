@@ -109,13 +109,3 @@ Plugins.configureSettings('triforce', {
   -- Enable some debugging messages
   debug = false,
 })
-
-if (Plugins.isPluginInstalled('triforce')) then
-  local wk = require("which-key")
-
-  wk.add({
-    { "<leader>s", group = "triforce" },
-  })
-
-  vim.keymap.set('n', '<leader>ss', require('triforce').show_profile, { desc = 'Show Triforce Stats' })
-end
