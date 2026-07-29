@@ -1,5 +1,6 @@
 local Plugins = require("utils.plugins")
 
+local firstOpen = true;
 local events = require("neo-tree.events");
 -- Mappings for Neo-tree
 Plugins.configureSettings("neo-tree", {
@@ -22,7 +23,7 @@ Plugins.configureSettings("neo-tree", {
     },
   },
   source_selector = {
-    winbar = false,
+    winbar = true,
   },
   window = {
     mappings = {
@@ -93,8 +94,8 @@ Plugins.configureSettings("neo-tree", {
       ["q"] = "close_window",
       ["R"] = "refresh",
       ["?"] = "show_help",
-      -- ["<S-h>"] = "prev_source",
-      -- ["<S-l>"] = "next_source",
+      ["<S-h>"] = "prev_source",
+      ["<S-l>"] = "next_source",
       ["i"] = "show_file_details",
       -- ["i"] = {
       --   "show_file_details",
@@ -109,7 +110,7 @@ Plugins.configureSettings("neo-tree", {
     },
   },
   filesystem = {
-    hijack_netrw_behavior = "open_current",
+    -- hijack_netrw_behavior = "open_current",
     window = {
       mappings = {
         ["<leader>h"] = { "toggle_hidden", desc = "Toggle hidden files" },
@@ -233,12 +234,34 @@ Plugins.configureSettings("neo-tree", {
   },
   event_handlers = {
     {
-      event = events.FILE_OPENED,
-      handler = function(file_path)
-        vim.cmd(":Neotree show")
+      event = events.NEO_TREE_WINDOW_AFTER_OPEN,
+      handler = function(opts)
+        if not firstOpen then
+          return
+        end
+
+        firstOpen = false
+
+        vim.schedule(function()
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            if win ~= opts.winid and vim.api.nvim_win_is_valid(win) then
+              local buf = vim.api.nvim_win_get_buf(win)
+
+              if vim.api.nvim_get_option_value("buftype", { buf = buf }) == "" then
+                pcall(vim.api.nvim_win_close, win, false)
+                break
+              end
+            end
+          end
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.bo[buf].buftype == "" then
+              vim.bo[buf].buflisted = false
+            end
+          end
+        end)
       end,
     },
-  },
+  }
 })
 
 
@@ -273,8 +296,8 @@ Plugins.configureKeymaps("neo-tree", {
   -- },
 })
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- require("neo-tree").setup({
 --   filesystem = {
