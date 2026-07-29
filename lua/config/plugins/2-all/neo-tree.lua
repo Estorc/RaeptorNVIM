@@ -113,7 +113,7 @@ Plugins.configureSettings("neo-tree", {
     -- hijack_netrw_behavior = "open_current",
     window = {
       mappings = {
-        ["<leader>h"] = { "toggle_hidden", desc = "Toggle hidden files" },
+        ["<C-h>"] = { "toggle_hidden", desc = "Toggle hidden files" },
         ["H"] = "noop",
         ["/"] = "fuzzy_finder",
         --["/"] = {"fuzzy_finder", config = { keep_filter_on_submit = true }},
@@ -137,13 +137,13 @@ Plugins.configureSettings("neo-tree", {
         ["on"] = "noop",
         ["os"] = "noop",
         ["ot"] = "noop",
-        ["<leader>oc"] = { "order_by_created", nowait = false },
-        ["<leader>od"] = { "order_by_diagnostics", nowait = false },
-        ["<leader>og"] = { "order_by_git_status", nowait = false },
-        ["<leader>om"] = { "order_by_modified", nowait = false },
-        ["<leader>on"] = { "order_by_name", nowait = false },
-        ["<leader>os"] = { "order_by_size", nowait = false },
-        ["<leader>ot"] = { "order_by_type", nowait = false },
+        ["<C-oc>"] = { "order_by_created", nowait = false },
+        ["<C-od>"] = { "order_by_diagnostics", nowait = false },
+        ["<C-og>"] = { "order_by_git_status", nowait = false },
+        ["<C-om>"] = { "order_by_modified", nowait = false },
+        ["<C-on>"] = { "order_by_name", nowait = false },
+        ["<C-os>"] = { "order_by_size", nowait = false },
+        ["<C-ot>"] = { "order_by_type", nowait = false },
       },
       fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
         ["<down>"] = "move_cursor_down",
@@ -184,12 +184,12 @@ Plugins.configureSettings("neo-tree", {
         ["on"] = "noop",
         ["os"] = "noop",
         ["ot"] = "noop",
-        ["<leader>oc"] = { "order_by_created", nowait = false },
-        ["<leader>od"] = { "order_by_diagnostics", nowait = false },
-        ["<leader>om"] = { "order_by_modified", nowait = false },
-        ["<leader>on"] = { "order_by_name", nowait = false },
-        ["<leader>os"] = { "order_by_size", nowait = false },
-        ["<leader>ot"] = { "order_by_type", nowait = false },
+        ["<C-oc>"] = { "order_by_created", nowait = false },
+        ["<C-od>"] = { "order_by_diagnostics", nowait = false },
+        ["<C-om>"] = { "order_by_modified", nowait = false },
+        ["<C-on>"] = { "order_by_name", nowait = false },
+        ["<C-os>"] = { "order_by_size", nowait = false },
+        ["<C-ot>"] = { "order_by_type", nowait = false },
       },
     },
   },
@@ -206,15 +206,15 @@ Plugins.configureSettings("neo-tree", {
         ["gp"] = "noop",
         ["gl"] = "noop",
         ["gg"] = "noop",
-        -- ["<leader>gu"] = "git_unstage_file",
-        -- ["<leader>gU"] = "git_undo_last_commit",
-        -- ["<leader>ga"] = "git_add_file",
-        -- ["<leader>gt"] = "git_toggle_file_stage",
-        -- ["<leader>gr"] = "git_revert_file",
-        -- ["<leader>gc"] = "git_commit",
-        -- ["<leader>gp"] = "git_push",
-        -- ["<leader>gl"] = "git_pull",
-        -- ["<leader>gg"] = "git_commit_and_push",
+        -- ["<C-gu>"] = "git_unstage_file",
+        -- ["<C-gU>"] = "git_undo_last_commit",
+        -- ["<C-ga>"] = "git_add_file",
+        -- ["<C-gt>"] = "git_toggle_file_stage",
+        -- ["<C-gr>"] = "git_revert_file",
+        -- ["<C-gc>"] = "git_commit",
+        -- ["<C-gp>"] = "git_push",
+        -- ["<C-gl>"] = "git_pull",
+        -- ["<C-gg>"] = "git_commit_and_push",
         ["o"] = { "open", nowait = true },
         ["oc"] = "noop",
         ["od"] = "noop",
@@ -223,12 +223,12 @@ Plugins.configureSettings("neo-tree", {
         ["on"] = "noop",
         ["os"] = "noop",
         ["ot"] = "noop",
-        ["<leader>oc"] = { "order_by_created", nowait = false },
-        ["<leader>od"] = { "order_by_diagnostics", nowait = false },
-        ["<leader>om"] = { "order_by_modified", nowait = false },
-        ["<leader>on"] = { "order_by_name", nowait = false },
-        ["<leader>os"] = { "order_by_size", nowait = false },
-        ["<leader>ot"] = { "order_by_type", nowait = false },
+        ["<C-oc>"] = { "order_by_created", nowait = false },
+        ["<C-od>"] = { "order_by_diagnostics", nowait = false },
+        ["<C-om>"] = { "order_by_modified", nowait = false },
+        ["<C-on>"] = { "order_by_name", nowait = false },
+        ["<C-os>"] = { "order_by_size", nowait = false },
+        ["<C-ot>"] = { "order_by_type", nowait = false },
       },
     },
   },
@@ -263,81 +263,3 @@ Plugins.configureSettings("neo-tree", {
     },
   }
 })
-
-
-Plugins.configureKeymaps("neo-tree", {
-  {
-    mode = "n",
-    lhs = "<leader>e",
-    rhs = "<cmd>Neotree toggle<cr>",
-    opts = { noremap = true, silent = true },
-    desc = "Toggle Neo-tree",
-  },
-  {
-    mode = "n",
-    lhs = "<leader>fe",
-    rhs = "<cmd>Neotree focus<cr>",
-    opts = { noremap = true, silent = true },
-    desc = "Focus Neo-tree",
-  },
-  -- {
-  --   mode = "n",
-  --   lhs = "<leader>be",
-  --   rhs = "<cmd>Neotree buffers<cr>",
-  --   opts = { noremap = true, silent = true },
-  --   desc = "Neo-tree Buffers",
-  -- },
-  -- {
-  --   mode = "n",
-  --   lhs = "<leader>ge",
-  --   rhs = "<cmd>Neotree git_status<cr>",
-  --   opts = { noremap = true, silent = true },
-  --   desc = "Neo-tree Git Status",
-  -- },
-})
-
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
--- require("neo-tree").setup({
---   filesystem = {
---     hijack_netrw_behavior = "open_current",
---   },
--- })
-
-
--- local first_time_only = true
--- vim.api.nvim_create_autocmd("BufEnter", {
---   callback = function()
---     local buf = vim.api.nvim_get_current_buf()
---     local filetype = vim.bo[buf].filetype
---
---     -- Check if the nvim arg is a directory
---     if vim.fn.argc() == 0 or vim.fn.isdirectory(vim.fn.argv(0)) == 0 then
---       return
---     end
---     if filetype ~= "neo-tree" and vim.fn.isdirectory(vim.fn.expand("%:p")) == 0 and first_time_only then
---       first_time_only = false
---       local has_neo = false
---
---       for _, win in ipairs(vim.api.nvim_list_wins()) do
---         local b = vim.api.nvim_win_get_buf(win)
---         if vim.bo[b].filetype == "neo-tree" then
---           has_neo = true
---           break
---         end
---       end
---
---       if not has_neo then
---         require("neo-tree.command").execute({
---           source = "filesystem",
---           position = "left",
---           reveal = true,
---           dir = vim.fn.getcwd(),
---         })
---         -- Focus the buffer window after opening Neo-tree
---         vim.cmd("wincmd p")
---       end
---     end
---   end,
--- })

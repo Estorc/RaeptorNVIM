@@ -1,4 +1,3 @@
-local Logger = require("utils.logger")
 local FS
 FS = {
   isFile = function(path)

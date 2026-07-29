@@ -82,7 +82,7 @@ dashboard.config.layout[1].val = padding
 -- dashboard.section.footer.val = fortune
 
 dashboard.section.footer.val = "󰃰 " .. os.date("%I:%M %p") .. "- " .. os.date("%A, %B %d, %Y") ..
-    " -  Ræptor NVIM - 󰛓 Plume - " ..
+    " -  RæptorNVIM - 󰛓 Plume - " ..
     vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
 
 dashboard.config.opts.noautocmd = true
