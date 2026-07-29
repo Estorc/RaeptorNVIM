@@ -100,6 +100,12 @@ wk.add({
   { "<leader>sh", ":Telescope help_tags<CR>", desc = "Search help tags" },
 })
 
+if (Plugins.isPluginInstalled('todo-comments')) then
+  wk.add({
+    { "<leader>st", ":TodoTelescope <CR>", desc = "Search Todo" },
+  })
+end
+
 -- Triforce
 if (Plugins.isPluginInstalled('triforce')) then
   wk.add({

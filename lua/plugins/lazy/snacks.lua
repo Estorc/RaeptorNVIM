@@ -26,5 +26,5 @@ return {
       window = { enabled = true },
     },
   },
-  FS.globRequire("plugins.snacks"),
+  FS.globRequire("plugins.lazy.snacks"),
 }

@@ -3,7 +3,7 @@ local Plugins = require("utils.plugins")
 
 Plugins.configureSettings("lazy", {
   spec = {
-    { import = "plugins" }
+    { import = "plugins.lazy" }
   },
   checker = {
     enabled = true, -- check for plugin updates periodically

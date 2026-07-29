@@ -28,7 +28,7 @@ vim.keymap.set("c", "<CR>", function()
     return "<C-u><CR>"
   elseif UsedCommand({ "qa", "quitall", "qall", "quita" }) then
     vim.schedule(function()
-      if (vim.bo.buftype == '') then
+      if (NVIM.isFileBuffer()) then
         Snacks.bufdelete.all()
         if #vim.fn.getbufinfo({ buflisted = 1 }) <= 1 and not vim.bo.modified then
           NVIM.closeAllWindowFileBuffer()

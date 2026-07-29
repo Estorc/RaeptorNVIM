@@ -37,15 +37,16 @@ local function lualine_middle()
           maxLevel = level
         end
       end
-      middle_cache.value = maxLevel.title .. " Lv." .. stats.level
+      middle_cache.value = "RæptorNVIM - Plume - " .. maxLevel.title .. " Lv." .. stats.level
       middle_cache.last = now
     end
+    -- Marquee effect for long titles using vim.uv
+    -- UTF-8 proof substring handling
     return middle_cache.value
   else
     return "RæptorNVIM - Plume"
   end
 end
-
 
 local function lualine_time()
   return os.date("%H:%M:%S")
@@ -127,6 +128,9 @@ local bubbles_theme = {
 
 Plugins.configureSettings('lualine', {
   options = {
+    refresh = {
+      statusline = 500,
+    },
     icons_enabled = true,
     theme = bubbles_theme,
     component_separators = '',

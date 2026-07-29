@@ -4,6 +4,9 @@ local firstOpen = true;
 local events = require("neo-tree.events");
 -- Mappings for Neo-tree
 Plugins.configureSettings("neo-tree", {
+  clipboard = {
+    sync = "universal",
+  },
   popup_border_style = "rounded",
   default_component_configs = {
     git_status = {
@@ -27,6 +30,51 @@ Plugins.configureSettings("neo-tree", {
   },
   window = {
     mappings = {
+      -- ['Y'] = function(state)
+      --   -- Copy global
+      --   local node = state.tree:get_node()
+      --   vim.fn.setreg('+', "neo-tree[y]:" .. node:get_id())
+      --   vim.notify(string.format('Copied "%s" to global register', node:get_id()), vim.log.levels.INFO)
+      --   -- Copy local
+      --   require("neo-tree.sources.manager").copy_to_clipboard(state, node)
+      -- end,
+      -- ['X'] = function(state)
+      --   -- Cut global
+      --   local node = state.tree:get_node()
+      --   vim.fn.setreg('+', "neo-tree[x]:" .. node:get_id())
+      --   vim.notify(string.format('Cuted "%s" to global register', node:get_id()), vim.log.levels.INFO)
+      --   -- Cut local
+      --   require("neo-tree.sources.manager").cut_to_clipboarde(state, node)
+      -- end,
+      -- ['P'] = function(state)
+      --   -- Paste global (using cp)
+      --   local node = state.tree:get_node()
+      --   local path = node:get_id()
+      --   local copy = vim.fn.getreg('+')
+      --   local mode = '';
+      --   -- Check mode and link
+      --   if string.sub(copy, 1, 13) == "neo-tree[y]:" then
+      --     copy = string.sub(copy, 14)
+      --     mode = 'y'
+      --   elseif string.sub(copy, 1, 13) == "neo-tree[x]:" then
+      --     copy = string.sub(copy, 14)
+      --     mode = 'x'
+      --   else
+      --     vim.notify(string.format('Invalid copy register: "%s"', copy), vim.log.levels.ERROR)
+      --     return
+      --   end
+      --   if copy ~= nil and copy ~= '' then
+      --     local cmd = ''
+      --     if mode == 'y' then
+      --       cmd = string.format('cp -r "%s" "%s"', copy, path)
+      --     elseif mode == 'x' then
+      --       cmd = string.format('mv "%s" "%s"', copy, path)
+      --     end
+      --     vim.fn.system(cmd)
+      --     require("neo-tree.sources.manager").refresh("filesystem")
+      --   end
+      --   vim.notify(string.format('Pasted "%s" to "%s"', copy, path), vim.log.levels.INFO)
+      -- end,
       -- ["<C-s>"] = {
       --   "quick_jump",
       --   config = {
@@ -113,7 +161,7 @@ Plugins.configureSettings("neo-tree", {
     -- hijack_netrw_behavior = "open_current",
     window = {
       mappings = {
-        ["<C-h>"] = { "toggle_hidden", desc = "Toggle hidden files" },
+        ["<C-s-h>"] = { "toggle_hidden", desc = "Toggle hidden files" },
         ["H"] = "noop",
         ["/"] = "fuzzy_finder",
         --["/"] = {"fuzzy_finder", config = { keep_filter_on_submit = true }},

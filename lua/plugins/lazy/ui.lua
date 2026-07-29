@@ -1,0 +1,21 @@
+local FS = require("utils.fs")
+return {
+  { "MunifTanjim/nui.nvim" },
+  { "goolord/alpha-nvim",             dependencies = { 'nvim-tree/nvim-web-devicons' } },
+  { 'nvim-lualine/lualine.nvim',      dependencies = { 'nvim-tree/nvim-web-devicons' } },
+  { 'saghen/blink.cmp',               dependencies = { 'saghen/blink.lib', 'rafamadriz/friendly-snippets' }, version = '1.*' },
+  { 'rcarriga/nvim-notify' },
+  { "folke/noice.nvim",               dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },     event = "VeryLazy", },
+  { "nvim-lua/plenary.nvim" },
+  { "petertriho/nvim-scrollbar" },
+  { "3rd/image.nvim" },
+  { 'kevinhwang91/nvim-ufo',          dependencies = 'kevinhwang91/promise-async' },
+  { "nvim-zh/colorful-winsep.nvim",   config = true,                                                         event = { "WinLeave" } },
+  { 'Tyler-Barham/floating-help.nvim' },
+  { "nvzone/showkeys",                cmd = "ShowkeysToggle" },
+  { "folke/todo-comments.nvim",       dependencies = { "nvim-lua/plenary.nvim" } },
+  FS.globRequire("plugins.lazy.editor"),
+  FS.globRequire("plugins.lazy.dap"),
+  FS.globRequire("plugins.lazy.nvchad"),
+  FS.globRequire("plugins.lazy.markdown"),
+}

@@ -4,6 +4,6 @@ return {
   { "nvim-treesitter/nvim-treesitter" },
   { "folke/which-key.nvim",           event = "VeryLazy" },
   { "folke/persistence.nvim",         event = "BufReadPre" },
-  FS.globRequire("plugins.lsp"),
-  FS.globRequire("plugins.ai")
+  FS.globRequire("plugins.lazy.lsp"),
+  FS.globRequire("plugins.lazy.ai")
 }

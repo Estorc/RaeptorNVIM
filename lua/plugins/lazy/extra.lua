@@ -1,4 +1,4 @@
 local FS = require("utils.fs")
 return {
-  FS.globRequire("plugins.extra"),
+  FS.globRequire("plugins.lazy.extra"),
 }
