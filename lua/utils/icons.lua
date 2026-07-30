@@ -14,7 +14,7 @@ Icons = {
     icon = '',
   },
   vim = {
-    icon = '',
+    icon = '',
   },
   close = {
     icon = '',

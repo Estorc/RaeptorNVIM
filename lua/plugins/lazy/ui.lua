@@ -8,7 +8,7 @@ return {
   { "folke/noice.nvim",               dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },     event = "VeryLazy", },
   { "nvim-lua/plenary.nvim" },
   { "petertriho/nvim-scrollbar" },
-  { "3rd/image.nvim" },
+  -- { "3rd/image.nvim" },
   { 'kevinhwang91/nvim-ufo',          dependencies = 'kevinhwang91/promise-async' },
   { "nvim-zh/colorful-winsep.nvim",   config = true,                                                         event = { "WinLeave" } },
   { 'Tyler-Barham/floating-help.nvim' },
