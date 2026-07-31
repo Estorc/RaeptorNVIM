@@ -4,3 +4,4 @@
 [ ] Replace telescope by Snacks picker ?
 [ ] <= Add these
 [ ] Mermaid support with Snacks image
+![](./lua/headers/img/datface.png)
