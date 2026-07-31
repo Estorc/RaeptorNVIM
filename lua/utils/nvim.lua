@@ -1,5 +1,11 @@
 local NVIM
 NVIM = {
+  getNormalWindows = function()
+    return vim.tbl_filter(function(win)
+      return vim.api.nvim_win_get_config(win).relative == ""
+    end, vim.api.nvim_tabpage_list_wins(0))
+  end,
+
   isFileBuffer = function(buffer)
     if buffer then
       return vim.bo[buffer].buftype == '' or
@@ -19,7 +25,10 @@ NVIM = {
     for _, win in ipairs(vim.api.nvim_list_wins()) do
       local buf = vim.api.nvim_win_get_buf(win)
 
-      if NVIM.isFileBuffer(buf) then
+      if (NVIM.isFileBuffer(buf)) then
+        if (#NVIM.getNormalWindows() == 1) then
+          vim.cmd("quitall!")
+        end
         vim.api.nvim_win_close(win, true)
       end
     end
