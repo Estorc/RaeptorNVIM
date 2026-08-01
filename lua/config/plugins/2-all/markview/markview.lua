@@ -37,3 +37,21 @@ Plugins.configureSettings("markview", {
     },
   },
 })
+
+if (Plugins.isPluginInstalled('markview')) then
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+      vim.opt_local.number = false
+      vim.opt_local.relativenumber = false
+      vim.opt_local.signcolumn = "no"
+      vim.opt_local.statuscolumn = ""
+
+      vim.opt_local.wrap = false
+      vim.opt_local.cursorcolumn = false
+      vim.opt_local.foldcolumn = "0"
+      vim.opt_local.list = false
+      vim.opt_local.spell = false
+    end,
+  })
+end

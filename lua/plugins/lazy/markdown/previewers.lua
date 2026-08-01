@@ -1,6 +1,6 @@
 return {
   {
-    'Thiago4532/mdmath.nvim',
+    dir = vim.fn.stdpath('config') .. "/lua/plugins/raeptor-mdmath.nvim",
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },

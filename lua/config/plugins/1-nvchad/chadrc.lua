@@ -1,6 +1,18 @@
 local options = {
   base46 = {
     theme = "vscode", -- default theme
+    hl_override = {
+      WhichKeyDesc = {
+        fg = "#ffffff", -- any color
+        bold = false,
+        italic = false,
+      },
+      WhichKeyGroup = {
+        fg = "#b3eb7a", -- any color
+        bold = true,
+        italic = false,
+      },
+    },
   },
   colorify = {
     enabled = true,

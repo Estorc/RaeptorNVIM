@@ -27,23 +27,4 @@ if Plugins.isPluginInstalled('image') then
       vim.opt_local.spell = false
     end,
   })
-else
-  local last_buf_id = -1
-  vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
-    callback = function(args)
-      if (last_buf_id == args.buf) then
-        return
-      end
-      vim.schedule(function()
-        last_buf_id = args.buf
-        if (vim.bo.filetype ~= 'image') then
-          return
-        end
-        if vim.api.nvim_get_current_buf() ~= args.buf then
-          return
-        end
-        vim.cmd("silent! edit")
-      end)
-    end,
-  })
 end

@@ -120,6 +120,7 @@ M.polish_hl = {
     ['ScrollBarGitChangeHandle'] = { bg = M.base_16.base03 },
     ['ScrollBarGitDeleteHandle'] = { bg = M.base_16.base03 },
     ['ScrollBarGitConflictHandle'] = { bg = M.base_16.base03 },
+    ['WhichKeyDesc'] = { fg = '#ffffff' },
 
   },
 }
