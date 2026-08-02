@@ -29,7 +29,7 @@ vim.schedule(function()
     { 'M' },
     { 'Y',     modes = { 'n', 'x' } },
     { '!',     modes = { 'n', 'x', 'o' } },
-    { '%',     modes = { 'n', 'x', 'o' } },
+    -- { '%',     modes = { 'n', 'x', 'o' } },
   }
 
   if AZERTY then
@@ -58,8 +58,8 @@ vim.schedule(function()
     { '<leader>',      group = "Specials",  icon = Icons.keyboard,  mode = 'nxo' },
     { "<localleader>", group = "Local",     icon = Icons.keyboard,  mode = 'nxo' },
 
-    { 'a',             group = 'Around',    icon = Icons.around,    mode = 'nox' },
-    { 'i',             group = 'Inside',    icon = Icons.around,    mode = 'nox' },
+    { 'a',             group = 'Around',    icon = Icons.around,    mode = 'ox' },
+    { 'i',             group = 'Inside',    icon = Icons.around,    mode = 'ox' },
     { '"',             group = 'Registers', icon = Icons.registers, mode = 'nxo' },
     { '`',             group = 'Marks',     icon = Icons.marks,     mode = 'nxo' },
     { '\'',            group = 'Marks',     icon = Icons.marks,     mode = 'nxo' },
@@ -82,57 +82,57 @@ vim.schedule(function()
   wk.add({
 
     { "K", desc = "Read documentation",      icon = Icons.documentation },
-    { 'd', 'd',                              mode = 'oxn',              desc = 'Delete',                icon = Icons.delete },
-    { 'y', 'y',                              mode = 'oxn',              desc = 'Yank',                  icon = Icons.copy },
-    { 'c', 'c',                              mode = 'oxn',              desc = 'Change',                icon = Icons.edit },
-    { 'r', 'r',                              mode = 'oxn',              desc = 'Replace',               icon = Icons.edit },
+    { 'd', mode = 'oxn',                     desc = 'Delete',                icon = Icons.delete },
+    { 'y', mode = 'oxn',                     desc = 'Yank',                  icon = Icons.copy },
+    { 'c', mode = 'oxn',                     desc = 'Change',                icon = Icons.edit },
+    { 'r', mode = 'oxn',                     desc = 'Replace',               icon = Icons.edit },
 
-    { '/', '/',                              mode = 'oxn',              desc = 'Search forward' },
-    { '?', '?',                              mode = 'oxn',              desc = 'Search backward' },
+    { '/', mode = 'oxn',                     desc = 'Search forward' },
+    { '?', mode = 'oxn',                     desc = 'Search backward' },
 
-    { 'h', 'h',                              mode = 'oxn',              desc = 'Left',                  icon = Icons.left },
-    { 'j', 'j',                              mode = 'oxn',              desc = 'Down',                  icon = Icons.down },
-    { 'k', 'k',                              mode = 'oxn',              desc = 'Up',                    icon = Icons.up },
-    { 'l', 'l',                              mode = 'oxn',              desc = 'Right',                 icon = Icons.right },
+    { 'h', mode = 'oxn',                     desc = 'Left',                  icon = Icons.left },
+    { 'j', mode = 'oxn',                     desc = 'Down',                  icon = Icons.down },
+    { 'k', mode = 'oxn',                     desc = 'Up',                    icon = Icons.up },
+    { 'l', mode = 'oxn',                     desc = 'Right',                 icon = Icons.right },
 
-    { '[', group = 'Move to previous token', icon = Icons.moveBackward, mode = 'nxo' },
-    { ']', group = 'Move to next token',     icon = Icons.moveForward,  mode = 'nxo' },
+    { '[', group = 'Move to previous token', icon = Icons.moveBackward,      mode = 'nxo' },
+    { ']', group = 'Move to next token',     icon = Icons.moveForward,       mode = 'nxo' },
 
-    { 'w', 'w',                              mode = 'oxn',              desc = 'Next word',             icon = Icons.moveForward },
-    { 'W', 'W',                              mode = 'oxn',              desc = 'Next WORD',             icon = Icons.moveForward },
-    { 't', 't',                              mode = 'oxn',              desc = 'Move before next char', icon = Icons.moveForward },
-    { 'T', 'T',                              mode = 'oxn',              desc = 'Move before prev char', icon = Icons.moveBackward },
-    { 'b', 'b',                              mode = 'oxn',              desc = 'Prev word',             icon = Icons.moveBackward },
-    { 'B', 'B',                              mode = 'oxn',              desc = 'Prev WORD',             icon = Icons.moveBackward },
-    { 'e', 'e',                              mode = 'oxn',              desc = 'Next end of word',      icon = Icons.moveForward },
-    { 'E', 'E',                              mode = 'oxn',              desc = 'Next end of WORD',      icon = Icons.moveForward },
-    { ';', ';',                              mode = 'oxn',              desc = 'Next ftFT',             icon = Icons.moveForward },
-    { ',', ',',                              mode = 'oxn',              desc = 'Prev ftFT',             icon = Icons.moveBackward },
+    { 'w', mode = 'oxn',                     desc = 'Next word',             icon = Icons.moveForward },
+    { 'W', mode = 'oxn',                     desc = 'Next WORD',             icon = Icons.moveForward },
+    { 't', mode = 'oxn',                     desc = 'Move before next char', icon = Icons.moveForward },
+    { 'T', mode = 'oxn',                     desc = 'Move before prev char', icon = Icons.moveBackward },
+    { 'b', mode = 'oxn',                     desc = 'Prev word',             icon = Icons.moveBackward },
+    { 'B', mode = 'oxn',                     desc = 'Prev WORD',             icon = Icons.moveBackward },
+    { 'e', mode = 'oxn',                     desc = 'Next end of word',      icon = Icons.moveForward },
+    { 'E', mode = 'oxn',                     desc = 'Next end of WORD',      icon = Icons.moveForward },
+    { ';', mode = 'oxn',                     desc = 'Next ftFT',             icon = Icons.moveForward },
+    { ',', mode = 'oxn',                     desc = 'Prev ftFT',             icon = Icons.moveBackward },
 
-    { '{', '{',                              mode = 'oxn',              desc = 'Prev empty line',       icon = Icons.moveBackward },
-    { '}', '}',                              mode = 'oxn',              desc = 'Next empty line',       icon = Icons.moveForward },
+    { '{', mode = 'oxn',                     desc = 'Prev empty line',       icon = Icons.moveBackward },
+    { '}', mode = 'oxn',                     desc = 'Next empty line',       icon = Icons.moveForward },
 
 
-    { '0', '0',                              mode = 'oxn',              desc = 'Start of line',         icon = Icons.start },
-    { '^', '^',                              mode = 'oxn',              desc = 'Start of line (no ws)', icon = Icons.start },
-    { '$', '$',                              mode = 'oxn',              desc = 'End of line',           icon = Icons.endd },
+    { '0', mode = 'oxn',                     desc = 'Start of line',         icon = Icons.start },
+    { '^', mode = 'oxn',                     desc = 'Start of line (no ws)', icon = Icons.start },
+    { '$', mode = 'oxn',                     desc = 'End of line',           icon = Icons.endd },
 
-    { 'f', 'f',                              mode = 'oxn',              desc = 'Move to next char',     icon = Icons.moveForward },
-    { 'F', 'F',                              mode = 'oxn',              desc = 'Move to prev char',     icon = Icons.moveBackward },
-    { 't', 't',                              mode = 'oxn',              desc = 'Move before next char', icon = Icons.moveForward },
-    { 'T', 'T',                              mode = 'oxn',              desc = 'Move before prev char', icon = Icons.moveBackward },
-    { ';', ';',                              mode = 'oxn',              desc = 'Next ftFT',             icon = Icons.moveForward },
-    { ',', ',',                              mode = 'oxn',              desc = 'Prev ftFT',             icon = Icons.moveBackward },
+    { 'f', mode = 'oxn',                     desc = 'Move to next char',     icon = Icons.moveForward },
+    { 'F', mode = 'oxn',                     desc = 'Move to prev char',     icon = Icons.moveBackward },
+    { 't', mode = 'oxn',                     desc = 'Move before next char', icon = Icons.moveForward },
+    { 'T', mode = 'oxn',                     desc = 'Move before prev char', icon = Icons.moveBackward },
+    { ';', mode = 'oxn',                     desc = 'Next ftFT',             icon = Icons.moveForward },
+    { ',', mode = 'oxn',                     desc = 'Prev ftFT',             icon = Icons.moveBackward },
 
-    { '>', '>gv',                            mode = 'x',                desc = 'Indent right',          icon = Icons.indentIncrease },
-    { '<', '<gv',                            mode = 'x',                desc = 'Indent left',           icon = Icons.indentDecrease },
-    { '>', '>',                              mode = 'n',                desc = 'Indent right',          icon = Icons.indentIncrease },
-    { '<', '<',                              mode = 'n',                desc = 'Indent left',           icon = Icons.indentDecrease },
+    { '>', mode = 'x',                       desc = 'Indent right',          icon = Icons.indentIncrease },
+    { '<', mode = 'x',                       desc = 'Indent left',           icon = Icons.indentDecrease },
+    { '>', mode = 'n',                       desc = 'Indent right',          icon = Icons.indentIncrease },
+    { '<', mode = 'n',                       desc = 'Indent left',           icon = Icons.indentDecrease },
 
-    { 'v', 'v',                              mode = 'xn',               desc = 'Visual',                icon = Icons.select },
-    { 'V', 'V',                              mode = 'xn',               desc = 'Visual Line',           icon = Icons.select },
+    { 'v', mode = 'xn',                      desc = 'Visual',                icon = Icons.select },
+    { 'V', mode = 'xn',                      desc = 'Visual Line',           icon = Icons.select },
 
-    { 'G', 'G',                              mode = 'oxn',              hidden = true },
+    { 'G', mode = 'oxn',                     hidden = true },
   })
 
   if AZERTY then
@@ -141,13 +141,16 @@ vim.schedule(function()
       { 'ù', '<Plug>(MatchitVisualForward)',    mode = 'x', desc = 'Matching (){}[]', icon = Icons.braces },
       { 'ù', '<Plug>(MatchitOperationForward)', mode = 'o', desc = 'Matching (){}[]', icon = Icons.braces },
     })
-  else
-    wk.add({
-      { '%', '<Plug>(MatchitNormalForward)',    mode = 'n', desc = 'Matching (){}[]' },
-      { '%', '<Plug>(MatchitVisualForward)',    mode = 'x', desc = 'Matching (){}[]' },
-      { '%', '<Plug>(MatchitOperationForward)', mode = 'o', desc = 'Matching (){}[]' },
-    })
   end
+  wk.add({
+    { '%', mode = 'n', desc = 'Matching (){}[]', icon = Icons.braces },
+    { '%', mode = 'x', desc = 'Matching (){}[]', icon = Icons.braces },
+    { '%', mode = 'o', desc = 'Matching (){}[]', icon = Icons.braces },
+  })
+
+  require('keymaps.[]')
+  require('keymaps.g')
+  require('keymaps.z')
 
   wk.add({
 

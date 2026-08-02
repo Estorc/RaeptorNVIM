@@ -171,8 +171,8 @@ Plugins.configureSettings("neo-tree", {
         ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
         ["f"] = "filter_on_submit",
         ["<C-x>"] = "clear_filter",
-        ["<bs>"] = "navigate_up",
-        ["."] = "set_root",
+        ["<A-h>"] = "navigate_up",
+        ["<A-l>"] = "set_root",
         ["[g"] = "prev_git_modified",
         ["]g"] = "next_git_modified",
         ["i"] = "show_file_details", -- see `:h neo-tree-file-actions` for options to customize the window.
@@ -222,8 +222,8 @@ Plugins.configureSettings("neo-tree", {
       mappings = {
         ["d"] = "buffer_delete",
         ["bd"] = "buffer_delete",
-        ["<bs>"] = "navigate_up",
-        ["."] = "set_root",
+        ["<A-h>"] = "navigate_up",
+        ["<A-l>"] = "set_root",
         ["o"] = { "open", nowait = true },
         ["oc"] = "noop",
         ["od"] = "noop",
@@ -310,4 +310,15 @@ Plugins.configureSettings("neo-tree", {
       end,
     },
   }
+})
+
+
+
+-- Disable h and l in neo-tree
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "neo-tree",
+  callback = function()
+    vim.keymap.set("n", "h", "<Nop>", { buffer = true })
+    vim.keymap.set("n", "l", "<Nop>", { buffer = true })
+  end,
 })

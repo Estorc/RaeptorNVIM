@@ -26,5 +26,5 @@ Plugins.configureSettings("nvim-treesitter", {
   highlight = { enable = true },
   indent = { enable = true },
   incremental_selection = { enable = true },
-  textobjects = { enable = true },
+  textobjects = { enable = false },
 })
