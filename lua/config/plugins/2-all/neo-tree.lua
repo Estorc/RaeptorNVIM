@@ -1,6 +1,13 @@
 local Plugins = require("utils.plugins")
 
 local firstOpen = true;
+local uv = vim.loop
+local stdout = uv.new_tty(1, false)
+if not stdout then
+  error('failed to open stdout')
+end
+-- stdout:write("\\033]0;NVIM\\007")
+
 local events = require("neo-tree.events");
 -- Mappings for Neo-tree
 Plugins.configureSettings("neo-tree", {

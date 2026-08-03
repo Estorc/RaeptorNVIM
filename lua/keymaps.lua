@@ -72,7 +72,7 @@ vim.schedule(function()
   if (Plugins.isPluginInstalled('floating-help')) then
     local fh = require('floating-help')
     wk.add({
-      { '<F1>', fh.toggle,                                                    desc = 'Open help',   icon = Icons.help },
+      { '<F1>', fh.toggle,                                                    mode = 'nxoi',        desc = 'Open help', icon = Icons.help },
       { '<F2>', function() fh.open('t=cppman', vim.fn.expand('<cword>')) end, desc = 'Open cppman', icon = Icons.help },
       { '<F3>', function() fh.open('t=man', vim.fn.expand('<cword>')) end,    desc = 'Open man',    icon = Icons.help },
     })
@@ -289,6 +289,15 @@ vim.schedule(function()
   if (Plugins.isPluginInstalled('neo-tree')) then
     wk.add({
       { "<leader>e", "<cmd>Neotree toggle<cr>", noremap = true, silent = true, desc = "Toggle Neo-tree" },
+    })
+  end
+
+  if (Plugins.isPluginInstalled('dropbar')) then
+    local dropbar_api = require('dropbar.api')
+    wk.add({
+      { '<Leader>;', dropbar_api.pick,                desc = 'Pick symbols in winbar',        icon = Icons.fileFind },
+      { '[;',        dropbar_api.goto_context_start,  desc = 'Go to start of current context' },
+      { '];',        dropbar_api.select_next_context, desc = 'Select next context' },
     })
   end
 

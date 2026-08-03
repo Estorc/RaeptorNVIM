@@ -6,7 +6,7 @@ return {
     opts = {
       image = {
         math = {
-          enabled = false, -- enable math expression rendering
+          enabled = true, -- enable math expression rendering
         }
       }
     },

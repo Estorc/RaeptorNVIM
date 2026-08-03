@@ -5,6 +5,9 @@ local function get_icon(_, item)
 end
 
 Plugins.configureSettings("markview", {
+  latex = {
+    enable = false
+  },
   markdown_inline = {
     tags = {
       default = {
