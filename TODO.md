@@ -1,25 +1,10 @@
-
-fez
-
-
-
-
-
-
-
-
-
-
-
-
-
 - [ ] Add neareast filter Snacks image
-- [ ] Fix Snacks image strip artifacts (ghostty only ???)
+- [ ] Fix Snacks image strip artifacts (ghostty only ??? : U param of kitty write)
 - [X] Add telescope image (Snacks image again ??)
 - [ ] Better splashscreen
-- [ ] Add Header image in md
+- [/] Add Header image in md
 - [X] Replace telescope by Snacks picker ?
-- [ ] Mermaid support with Snacks image
+- [/] Mermaid support with Snacks image
 - [x] Redo <leader> mapping
 - [x] Redo . mapping
 - [ ] Redo <z> mapping again

@@ -11,6 +11,7 @@ return {
       indent = { enabled = true },
       input = { enabled = true },
       picker = { enabled = true },
+      profiler = { enabled = true },
       -- notifier = { enabled = true },
       bufdelete = { enabled = true },
       image = { enabled = true },

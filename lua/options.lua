@@ -14,6 +14,33 @@ vim.o.wrap = false
 vim.o.confirm = true
 vim.o.cursorline = true
 
+vim.o.title = true
+local function update_title()
+  vim.schedule(function()
+    local name = vim.api.nvim_buf_get_name(0)
+
+    vim.o.titlestring = "  "
+
+    if name == "" then
+      vim.o.titlestring = vim.o.titlestring .. "RæptorNVIM"
+      return
+    end
+
+    vim.o.titlestring = vim.o.titlestring .. vim.fn.fnamemodify(name, ":t")
+  end)
+end
+
+vim.api.nvim_create_autocmd({
+  "BufEnter",
+  "BufWinEnter",
+  "WinEnter",
+}, {
+  callback = update_title,
+})
+
+update_title()
+
+
 -- Add undo file
 vim.opt.undofile = true
 

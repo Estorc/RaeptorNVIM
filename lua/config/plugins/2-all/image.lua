@@ -3,9 +3,10 @@ local Plugins = require("utils.plugins")
 
 Plugins.configureSettings('image', {
   backend = "kitty",
+  hijack_file_patterns = {},
   integrations = {
     markdown = {
-      enabled = true,
+      enabled = false,
     },
   }
 })
